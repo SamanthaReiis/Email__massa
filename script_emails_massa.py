@@ -85,14 +85,15 @@ html =  '''
 fp = open("images/header.png", 'rb')
 
 
-# Criando um objeto MIMEImage with the above file object.
+# Criando um objeto MIMEImage com o objeto de arquivo acima.
 msgImage = MIMEImage(fp.read())
 
 
-# Do not forget close the file object after using it.
-fp.close()
+# Não se esqueça de fechar o objeto de arquivo após usá-lo.
+fp.close ()
 
-# Add 'Content-ID' header value to the above MIMEImage object to make it refer to the image source (src="cid:image1") in the Html content.
+
+# Adicione o valor do cabeçalho 'Content-ID' ao objeto MIMEImage acima para fazer com que ele se refira à fonte da imagem (src = "cid: image1") no conteúdo Html.
 msgImage.add_header('Content-ID', '<image1>')
 
 
@@ -102,6 +103,7 @@ author = formataddr((str(Header(u'DATA_LABE', 'utf-8')), SenderAddress))
 for name, email in zip(names, emails):
     msg = MIMEMultipart()       # cria a mensagem
     emailfrom = "Data_Labe"
+
     # add o nome da pessoa na mensagem base
     message = message_template.substitute(PERSON_NAME= name.title())
 
@@ -113,7 +115,7 @@ for name, email in zip(names, emails):
     part2 = MIMEText(html, 'html')
 
 
-    # Attach the MIMEImage object to the email body.
+    # Anexe o objeto MIMEImage ao corpo do e-mail.
     msg.attach(msgImage)
     msg.attach(msgImage2)
     msg.attach(msgImage3)
@@ -142,7 +144,7 @@ for name, email in zip(names, emails):
     server.send_message(msg)
     
     del msg
-    #time.sleep(1) # equivalent to 1 second sleep
+    #time.sleep(1) # Dá uma pausa de 1s entre um email e outro
 
 
 print('Emails enviados!!')
